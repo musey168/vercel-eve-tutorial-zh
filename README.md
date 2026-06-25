@@ -391,6 +391,8 @@ export default defineSandbox({
 
 > `defaultBackend()` 只是按 Vercel → Docker → microsandbox → just-bash 的优先级挑后端；网络收紧走 `onSession` 里的 `use({ networkPolicy: "deny-all" })`（阻断所有出网 + DNS）。
 > 沙箱只是模型跑代码的草稿空间；访问你的业务系统要走 connections，不是走沙箱。起步可以先不配（框架自带默认沙箱），等让模型执行代码时再收紧。
+>
+> 还有两个相关的布局目录（不是独立模块，知道即可）：要**预置进沙箱**的文件放 `agent/sandbox/workspace/`（启动时种入沙箱）；纯给 tools/subagents 复用的 TypeScript 辅助代码放 `agent/lib/`（仅供 import，不会进沙箱）。
 
 **Evals（建议有）** —— 给 agent 写自动化测试。两个文件：
 
